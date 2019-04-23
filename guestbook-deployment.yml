@@ -1,0 +1,25 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: guestbook-deployment
+  labels:
+    name: guestbook-deployment
+    app: guestbook-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      name: guestbook-pod
+      app: guestbook-app
+  template:
+    metadata:
+      name: guestbook-pod
+      labels:
+        name: guestbook-pod
+        app: guestbook-app
+    spec:
+      containers:
+        - name: guestbook-app
+          image: kubernetes/guestbook:v2
+          ports:
+            - containerPort: 3000
